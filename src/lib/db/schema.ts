@@ -1,5 +1,5 @@
 /* ============================================================
- * QAVEN — Database-oriented schema (DB-agnostic types)
+ * ALDIRXON — Database-oriented schema (DB-agnostic types)
  * ------------------------------------------------------------
  * هذه الأنواع هي "العقد" بين الواجهة وقاعدة البيانات.
  * SQL DDL المقابل موثق في docs/DATABASE.md.

@@ -32,12 +32,12 @@ export default function AboutPage() {
       <section className="border-b border-mist">
         <div className="shell grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="eyebrow">ABOUT QAVEN</p>
+            <p className="eyebrow">ABOUT ALDIRXON</p>
             <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
               التقنية، ببساطة أفضل.
             </h1>
             <p className="mt-5 max-w-md text-sm leading-7 text-steel">
-              بدأ QAVEN من سؤال بسيط: لماذا يكون شراء جهاز جديد عملية مزعجة؟
+              بدأ ALDIRXON من سؤال بسيط: لماذا يكون شراء جهاز جديد عملية مزعجة؟
               بنينا متجراً هادئاً يعرض ما يُختار بعناية، بأسعار واضحة، وتوصيل داخل
               سلطنة عُمان — بلا ضوضاء تسويقية.
             </p>
@@ -45,7 +45,7 @@ export default function AboutPage() {
           <div className="overflow-hidden rounded-2xl bg-cloud">
             <SafeImg
               src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80"
-              alt="أجهزة QAVEN"
+              alt="أجهزة ALDIRXON"
               className="aspect-[4/3.2] w-full object-cover"
             />
           </div>

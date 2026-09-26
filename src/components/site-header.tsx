@@ -56,7 +56,7 @@ export function SiteHeader() {
           <span className="hidden text-steel sm:inline">·</span>
           <span className="hidden text-silver sm:inline">السريع 24-48 ساعة بـ 2.500 ر.ع</span>
           <span className="hidden text-steel md:inline">·</span>
-          <span className="hidden text-silver md:inline">+968 9XXX XXXX</span>
+          <span className="hidden text-silver md:inline">+968 9553 5100</span>
         </div>
       </div>
 
@@ -64,8 +64,8 @@ export function SiteHeader() {
       <div className="border-b border-mist bg-paper2/95 backdrop-blur supports-[backdrop-filter]:bg-paper2/85">
         <div className="shell flex h-16 items-center justify-between">
           <div className="flex items-center gap-9">
-            <Link href="/" className="text-lg font-bold tracking-[0.24em] text-ink">
-              QAVEN
+            <Link href="/"            className="text-lg font-bold tracking-[0.24em] text-ink">
+              ALDIRXON
             </Link>
             <nav className="hidden items-center gap-7 lg:flex">
               {links.map((l) => (

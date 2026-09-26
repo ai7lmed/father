@@ -52,7 +52,7 @@ export function MobileTabBar() {
 export function WhatsAppFab() {
   return (
     <a
-      href="https://wa.me/96890000000"
+      href="https://wa.me/96895535100"
       target="_blank"
       rel="noreferrer"
       aria-label="تواصل عبر واتساب"

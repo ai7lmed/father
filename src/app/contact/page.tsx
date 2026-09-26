@@ -29,14 +29,14 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "البريد الإلكتروني",
-      value: "support@qaven.om",
-      href: "mailto:support@qaven.om",
+      value: "support@aldirxon.om",
+      href: "mailto:support@aldirxon.om",
     },
     {
       icon: Phone,
       title: "الهاتف / واتساب",
-      value: "+968 9XXX XXXX",
-      href: "tel:+96890000000",
+      value: "+968 9553 5100",
+      href: "https://wa.me/96895535100",
     },
     {
       icon: MapPin,

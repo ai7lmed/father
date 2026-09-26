@@ -14,7 +14,8 @@ import {
   relatedProducts,
   type Product,
 } from "@/lib/products";
-import { Stars, SafeImg, StockPill, Accordion } from "@/components/ui";
+import { Stars, StockPill, Accordion } from "@/components/ui";
+import { ProductGallery } from "@/components/product-gallery";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeader } from "@/components/section-header";
 import { Reveal } from "@/components/motion";
@@ -24,11 +25,9 @@ export function ProductDetail({ product }: { product: Product }) {
   const { has, toggle } = useWishlist();
   const router = useRouter();
   const [qty, setQty] = useState(1);
-  const [activeImg, setActiveImg] = useState(0);
   const [pop, setPop] = useState(false);
   const off = discountPercent(product);
   const related = relatedProducts(product);
-  const gallery = [product.img, ...(product.gallery ?? [])];
   const wished = has(product.id);
 
   const buyNow = () => {
@@ -53,41 +52,13 @@ export function ProductDetail({ product }: { product: Product }) {
 
       <div className="shell py-8 sm:py-12">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Gallery */}
+          {/* Gallery: صورة المنتج + صور product_images من قاعدة البيانات */}
           <div>
-            <div className="relative overflow-hidden rounded-2xl bg-cloud">
-              <div className="aspect-square w-full">
-                <SafeImg
-                  key={activeImg}
-                  src={gallery[activeImg]}
-                  alt={product.name}
-                  className="page-enter h-full w-full object-cover"
-                  eager
-                />
-              </div>
-              {off > 0 && (
-                <span className="absolute start-4 top-4 rounded-md bg-accent px-2.5 py-1 text-xs font-semibold text-white">
-                  خصم {off}%
-                </span>
-              )}
-            </div>
-
-            {gallery.length > 1 && (
-              <div className="mt-3 flex gap-2.5">
-                {gallery.map((src, i) => (
-                  <button
-                    key={src}
-                    type="button"
-                    onClick={() => setActiveImg(i)}
-                    aria-label={`صورة ${i + 1}`}
-                    className={`h-18 w-18 overflow-hidden rounded-lg border-2 transition-colors ${
-                      i === activeImg ? "border-ink" : "border-transparent opacity-70 hover:opacity-100"
-                    }`}
-                  >
-                    <SafeImg src={src} alt="" className="h-full w-full object-cover" />
-                  </button>
-                ))}
-              </div>
+            <ProductGallery images={[product.img, ...(product.gallery ?? [])]} alt={product.name} />
+            {off > 0 && (
+              <span className="mt-3 inline-block rounded-md bg-accent px-2.5 py-1 text-xs font-semibold text-white">
+                خصم {off}%
+              </span>
             )}
           </div>
 

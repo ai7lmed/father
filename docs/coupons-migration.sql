@@ -1,5 +1,5 @@
 -- ============================================================
--- QAVEN — Coupons (كوبون الشكر 2.000 ر.ع)
+-- ALDIRXON — Coupons (كوبون الشكر 2.000 ر.ع)
 -- التنفيذ: Supabase Dashboard → SQL Editor → Run
 -- آمن لإعادة التشغيل (if not exists + drop policy if exists)
 -- ============================================================
@@ -11,7 +11,7 @@ create table if not exists public.coupons (
   customer_id           uuid not null references public.customers(id) on delete cascade,
   discount_amount       numeric(10,3) not null check (discount_amount > 0),
   minimum_product_price numeric(10,3) not null default 0 check (minimum_product_price >= 0),
-  order_id              text references public.orders(id) on delete set null,
+  order_id              text, -- بدون FK: تُملأ قبل إدراج الطلب في /api/orders
   used_at               timestamptz,
   expires_at            timestamptz,
   created_at            timestamptz not null default now()
@@ -85,6 +85,10 @@ begin
 end;
 $$;
 
+-- إصلاح تكاملي (مطبَّق): الـ FK على order_id كان يمنع apply_coupon من النجاح
+-- لأنها تُستدعى قبل إدراج الطلب في /api/orders. إن كان الجدول منفّذاً بنسخة سابقة:
+alter table public.coupons drop constraint if exists coupons_order_id_fkey;
+
 -- ─── 3) الدالة التلقائية: كوبون واحد لكل عميل بعد أول طلب ───
 --    تُستدعى بعد إدراج order_items بنجاح (من /api/orders) — idempotent
 create or replace function public.issue_thanks_coupon(
@@ -112,7 +116,7 @@ begin
     return v_code;
   end if;
 
-  v_code := 'QAVEN2-' || upper(substr(md5(p_customer_id::text || random()::text), 1, 6));
+  v_code := 'ALDIRXON2-' || upper(substr(md5(p_customer_id::text || random()::text), 1, 6));
 
   insert into public.coupons (code, customer_id, discount_amount, minimum_product_price, expires_at)
   values (v_code, p_customer_id, 2.000, 12.000, now() + interval '60 days')

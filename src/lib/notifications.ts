@@ -1,7 +1,7 @@
 import { supabaseAdmin } from "@/lib/auth/customers";
 
 /* ============================================================
- * QAVEN — Notifications (server-only)
+ * ALDIRXON — Notifications (server-only)
  * ------------------------------------------------------------
  * Resend invoice email + WhatsApp Cloud API (Meta) abstraction.
  * • كل الإرسالات بعد نجاح الطلب في قاعدة البيانات فقط
@@ -10,7 +10,7 @@ import { supabaseAdmin } from "@/lib/auth/customers";
  * ============================================================ */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAIL_FROM = process.env.MAIL_FROM ?? "QAVEN <onboarding@resend.dev>";
+const MAIL_FROM = process.env.MAIL_FROM ?? "ALDIRXON <onboarding@resend.dev>";
 
 const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
 const WHATSAPP_PHONE_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
@@ -95,7 +95,7 @@ export async function sendOrderEmail(o: OrderNotification): Promise<{ ok: boolea
 <tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px; background-color:#ffffff; border:1px solid #e4e4e7; border-radius:12px;">
   <tr><td style="padding:32px 36px 4px; text-align:center;">
-    <p style="margin:0; font-size:18px; font-weight:700; letter-spacing:8px; color:#0b0b0d;">QAVEN</p>
+    <p style="margin:0; font-size:18px; font-weight:700; letter-spacing:8px; color:#0b0b0d;">ALDIRXON</p>
     <h1 style="margin:14px 0 0; font-size:19px; font-weight:700; color:#0b0b0d;">تأكيد الطلب</h1>
     <p style="margin:10px 0 0; font-size:13px; line-height:1.8; color:#3f3f46;">شكراً ${esc(o.customerName)} — طلبك وصلنا وسنبدأ بتجهيزه فوراً.</p>
   </td></tr>
@@ -158,8 +158,8 @@ export async function sendOrderEmail(o: OrderNotification): Promise<{ ok: boolea
   </td></tr>
 
   <tr><td style="padding:22px 36px 34px; text-align:center;">
-    <p style="margin:0; font-size:12px; line-height:1.9; color:#71717a;">إذا لم تطلب هذا الطلب، تواصل معنا فوراً على support@qaven.om</p>
-    <p style="margin:12px 0 0; font-size:11px; color:#a1a1aa;">QAVEN — متجر الإلكترونيات والأجهزة الذكية · سلطنة عُمان</p>
+    <p style="margin:0; font-size:12px; line-height:1.9; color:#71717a;">إذا لم تطلب هذا الطلب، تواصل معنا فوراً على support@aldirxon.om</p>
+    <p style="margin:12px 0 0; font-size:11px; color:#a1a1aa;">ALDIRXON — متجر الإلكترونيات والأجهزة الذكية · سلطنة عُمان</p>
   </td></tr>
 </table>
 </td></tr>
@@ -177,7 +177,7 @@ export async function sendOrderEmail(o: OrderNotification): Promise<{ ok: boolea
       body: JSON.stringify({
         from: MAIL_FROM,
         to: [o.customerEmail],
-        subject: `تأكيد طلبك ${o.id} | QAVEN`,
+        subject: `تأكيد طلبك ${o.id} | ALDIRXON`,
         html,
       }),
     });
@@ -206,7 +206,7 @@ export async function sendOrderWhatsApp(o: OrderNotification): Promise<{ ok: boo
   const lines = o.items.map((it) => `• ${it.name} × ${it.qty} — ${OMR(it.unitPrice * it.qty)}`).join("\n");
   const text =
     `مرحباً ${o.customerName} 👋\n` +
-    `تم استلام طلبك في QAVEN\n\n` +
+    `تم استلام طلبك في ALDIRXON\n\n` +
     `رقم الطلب: ${o.id}\n` +
     `الحالة: ${STATUS_AR[o.status] ?? o.status}\n\n` +
     `${lines}\n\n` +
@@ -214,7 +214,7 @@ export async function sendOrderWhatsApp(o: OrderNotification): Promise<{ ok: boo
     `${DELIVERY_AR[o.deliveryMethod] ?? o.deliveryMethod}\n` +
     `طريقة الدفع: ${PAYMENT_AR[o.paymentMethod] ?? o.paymentMethod}\n` +
     `الإجمالي: ${OMR(o.total)}\n\n` +
-    `شكراً لتسوقك من QAVEN — سنتواصل معك لتأكيد التوصيل.`;
+    `شكراً لتسوقك من ALDIRXON — سنتواصل معك لتأكيد التوصيل.`;
 
   try {
     const res = await fetch(`https://graph.facebook.com/v20.0/${WHATSAPP_PHONE_ID}/messages`, {

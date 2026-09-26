@@ -1,5 +1,5 @@
 -- ============================================================
--- QAVEN — Supabase Schema (كامل — يطابق الكود حرفياً)
+-- ALDIRXON — Supabase Schema (كامل — يطابق الكود حرفياً)
 -- التنفيذ: Supabase Dashboard → SQL Editor → paste → Run
 -- المراجعة: متوافق مع src/lib/db/schema.ts + src/app/api/*
 -- ============================================================
@@ -327,7 +327,7 @@ create policy "settings_public_read" on public.settings for select using (true);
 
 insert into public.settings (key, value) values
   ('free_shipping_threshold', '25'),
-  ('bank_account', '{"bankName":"بنك مسقط","accountName":"شركة قافن للتجارة","accountNumber":"0301-234567-001","iban":"OM45BOMR0301234567001"}'::jsonb)
+  ('bank_account', '{"bankName":"بنك مسقط","accountName":"شركة الدايركسون للتجارة","accountNumber":"0301-234567-001","iban":"OM45BOMR0301234567001"}'::jsonb)
 on conflict (key) do nothing;
 
 -- ============================================================

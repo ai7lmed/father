@@ -1,7 +1,7 @@
 "use client";
 
 /* ============================================================
- * QAVEN — Auth context (جلسة حقيقية عبر Supabase)
+ * ALDIRXON — Auth context (جلسة حقيقية عبر Supabase)
  * ------------------------------------------------------------
  * الجلسة تُدار بكوكيز HttpOnly عبر @supabase/ssr (middleware).
  * هذا الـ Provider يقرأ الجلسة من الخادم فقط — لا localStorage.

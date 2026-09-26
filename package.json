@@ -1,5 +1,6 @@
 {
-  "name": "qaven",
+  "name": "aldirxon",
+  "description": "ALDIRXON — متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان",
   "version": "0.1.0",
   "private": true,
   "scripts": {

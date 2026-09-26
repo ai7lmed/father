@@ -29,7 +29,7 @@ export default function HomePage() {
       <Featured />
       <BestSellers />
       <GamingHub />
-      <WhyQaven />
+      <WhyAldirxon />
       <Latest />
       <Social />
     </>
@@ -56,7 +56,7 @@ function Hero() {
             Technology. <span className="text-accent">Simplified.</span>
           </h1>
           <p className="mt-5 text-[15px] leading-8 text-graphite">
-            QAVEN متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان — هواتف، سماعات،
+            ALDIRXON متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان — هواتف، سماعات،
             أجهزة Gaming ومنتجات المنزل الذكي، مختارة من علامات موثوقة وبضمان الوكيل.
           </p>
 
@@ -97,7 +97,7 @@ function Hero() {
             <div className="relative overflow-hidden rounded-2xl bg-cloud">
               <SafeImg
                 src={HERO_IMG}
-                alt="لابتوبات وأجهزة QAVEN"
+                alt="لابتوبات وأجهزة ALDIRXON"
                 eager
                 className="aspect-[4/3.4] h-full w-full object-cover"
               />
@@ -248,7 +248,7 @@ function GamingHub() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan">
-                QAVEN GAMING
+                ALDIRXON GAMING
               </p>
               <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
                 مركز الألعاب — Level up your setup
@@ -296,7 +296,7 @@ function GamingHub() {
   );
 }
 
-/* ————————————————— Why QAVEN ————————————————— */
+/* ————————————————— Why ALDIRXON ————————————————— */
 
 const whyPoints = [
   {
@@ -321,12 +321,12 @@ const whyPoints = [
   },
 ];
 
-function WhyQaven() {
+function WhyAldirxon() {
   return (
     <section className="border-y border-mist bg-paper">
       <div className="shell py-14 sm:py-18 lg:py-20">
         <Reveal>
-          <SectionHeader eyebrow="WHY QAVEN" title="لماذا يتسوق العملاء من QAVEN؟" />
+          <SectionHeader eyebrow="WHY ALDIRXON" title="لماذا يتسوق العملاء من ALDIRXON؟" />
         </Reveal>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {whyPoints.map((point, i) => (
@@ -389,7 +389,7 @@ function Social() {
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">@QAVEN.OM</p>
+              <p className="eyebrow">@ALDIRXON</p>
               <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
                 تابعنا على إنستغرام
               </h2>
@@ -401,7 +401,7 @@ function Social() {
               className="inline-flex items-center gap-2 text-sm text-graphite transition-colors hover:text-ink"
             >
               <Instagram size={17} strokeWidth={1.6} />
-              qaven.om
+              aldirxon.om
             </a>
           </div>
         </Reveal>
@@ -418,7 +418,7 @@ function Social() {
               >
                 <SafeImg
                   src={src}
-                  alt="QAVEN على إنستغرام"
+                  alt="ALDIRXON على إنستغرام"
                   className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                 />
                 <span className="absolute inset-0 flex items-center justify-center bg-ink/0 opacity-0 transition-all duration-200 group-hover:bg-ink/30 group-hover:opacity-100">

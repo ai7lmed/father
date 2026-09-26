@@ -4,7 +4,7 @@ import { categories, categoryHref } from "@/lib/products";
 
 const storeLinks = [
   { href: "/shop", label: "كل المنتجات" },
-  { href: "/gaming", label: "QAVEN Gaming" },
+  { href: "/gaming", label: "ALDIRXON Gaming" },
   { href: "/shop?cat=solar-cameras", label: "كاميرات شمسية" },
   { href: "/shop?cat=car-gps", label: "GPS السيارات" },
   { href: "/wishlist", label: "المفضلة" },
@@ -58,7 +58,7 @@ export function SiteFooter() {
       <div className="shell grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
         <div>
           <Link href="/" className="text-lg font-bold tracking-[0.24em]">
-            QAVEN
+            ALDIRXON
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-7 text-silver">
             متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان — منتجات أصلية بضمان
@@ -70,14 +70,14 @@ export function SiteFooter() {
             </p>
             <p className="flex items-center gap-2">
               <Mail size={15} strokeWidth={1.6} />
-              <a href="mailto:support@qaven.om" dir="ltr" className="transition-colors hover:text-white">
-                support@qaven.om
+              <a href="mailto:support@aldirxon.om" dir="ltr" className="transition-colors hover:text-white">
+                support@aldirxon.om
               </a>
             </p>
             <p className="flex items-center gap-2">
               <Phone size={15} strokeWidth={1.6} />
-              <a href="tel:+96890000000" dir="ltr" className="transition-colors hover:text-white">
-                +968 9XXX XXXX
+              <a href="tel:+96895535100" dir="ltr" className="transition-colors hover:text-white">
+                +968 9553 5100
               </a>
             </p>
           </div>
@@ -92,7 +92,7 @@ export function SiteFooter() {
               <Instagram size={16} strokeWidth={1.6} />
             </a>
             <a
-              href="https://wa.me/96890000000"
+              href="https://wa.me/96895535100"
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
@@ -115,7 +115,7 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="shell flex flex-col items-center justify-between gap-4 py-6 sm:flex-row">
           <p className="text-xs text-steel">
-            © 2026 QAVEN. جميع الحقوق محفوظة — سلطنة عُمان
+            © 2026 ALDIRXON. جميع الحقوق محفوظة — سلطنة عُمان
           </p>
           <div className="flex flex-wrap items-center justify-center gap-1.5">
             {payments.map((p) => (

@@ -16,10 +16,10 @@ export default function LoginPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30" />
           <div className="relative flex h-full flex-col justify-between p-10">
             <Link href="/" className="text-xl font-bold tracking-[0.35em] text-white">
-              QAVEN
+              ALDIRXON
             </Link>
             <div className="stagger-in">
-              <p className="eyebrow text-silver">QAVEN ACCOUNT</p>
+              <p className="eyebrow text-silver">ALDIRXON ACCOUNT</p>
               <h2 className="mt-3 text-2xl font-semibold leading-relaxed text-white">
                 تقنيتك، بأقل خطوة.
               </h2>
@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div className="p-7 sm:p-10 lg:order-1">
           <div className="mb-7 flex items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-[0.35em] text-ink lg:hidden">
-              QAVEN
+              ALDIRXON
             </Link>
             <Link
               href="/"
@@ -64,7 +64,7 @@ export default function LoginPage() {
           </div>
 
           <h1 className="text-2xl font-semibold tracking-tight text-ink">
-            مرحباً بك في QAVEN
+            مرحباً بك في ALDIRXON
           </h1>
           <p className="mt-2 text-sm text-steel">
             سجّل دخولك أو أنشئ حساباً جديداً — التجربة نفسها في الحالتين.

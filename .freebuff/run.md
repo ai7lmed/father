@@ -1,4 +1,4 @@
-# QAVEN — Run doc
+# ALDIRXON — Run doc
 
 بيئة: Windows · npm · Next.js 15 (App Router) · Tailwind 4 · TypeScript
 
@@ -38,12 +38,21 @@ npx tsc --noEmit
 
 # Build إنتاجي (أوقف الخادم أولاً — يشاركان .next)
 npm run build
+
+# تشغيل نسخة الإنتاج للمعاينة (بعد build — يستخدم .next المبنية)
+npm run start -- -p 4321
 ```
+
+- ⚠️ `next start` **بدون** `-p` يختار منفذاً عشوائياً (49xxx) — مرّر `-p 4321` صراحةً دائماً.
+- أمر الإقلاع detached نفسه أعلاه مع `ArgumentList 'run','start','--','-p','4321'` بدل `dev`.
 
 ### Known issues
 
 - **ENOSPC**: إذا ظهر `no space left on device` في السجل، نظّف npm cache:
   `npm cache clean --force` (حرّر 74GB في آخر مرة).
-- **Supabase**: المشروع الحالي في `.env.local` غير مُنشأ/متوقف (`ENOTFOUND` عند الوصول).
-  أنشئ مشروعاً حقيقياً وحدّث المفاتيح — Auth لن يعمل فعلياً حتى ذلك الحين.
-  الكود جاهز بالكامل: `src/app/api/auth/*`, `src/lib/auth/*`, `docs/AUTH-INTEGRATION.md`.
+- **Supabase**: المشروع `pskheqemoeibgoeqmfff` يعمل الآن (schema منفَّذ — 14 جدول، OTP عبر Custom SMTP/Resend يعمل).
+  - جدول `coupons` غير موجود: نفّذ `docs/coupons-migration.sql` من Supabase → SQL Editor.
+  - Google Provider غير مفعّل (`google:false`) — يُفعَّل من لوحة Supabase.
+  - Google Auth endpoints موجودة: `src/app/api/auth/*`, `src/lib/auth/*`, `docs/AUTH-INTEGRATION.md`.
+- **صور المنتجات**: تُحفظ في Supabase Storage — bucket عام للقراءة `product-media` (الكتابة من الخادم فقط عبر `/api/admin/upload`؛ الصور المسجلة في جدول `product_images` الموجود أصلاً). إعداد الـ bucket موثق في `docs/dashboard-images-migration.sql`.
+- **النشر**: المجلد الآن مستودع Git (فرع `main`) مع remote `origin → https://github.com/ai7lmed/father.git`. `.env.local` غير متتبَّع (`.gitignore` يغطي `.env*`) — لا ترفعه أبداً؛ في checkout جديد انسخه من المشروع الأساسي.

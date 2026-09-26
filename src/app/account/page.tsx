@@ -202,7 +202,7 @@ function SignedIn({
           <p className="eyebrow">ACCOUNT</p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight">حسابي</h1>
           <p className="mt-2 text-sm text-steel">
-            {customer.name || "عميل QAVEN"}
+            {customer.name || "عميل ALDIRXON"}
             {customer.email && (
               <>
                 {" · "}

@@ -1,4 +1,4 @@
-# QAVEN — دليل ربط Supabase خطوة بخطوة
+# ALDIRXON — دليل ربط Supabase خطوة بخطوة
 
 > نفّذ هذه الخطوات بالترتيب. المدة الكلية: ~20 دقيقة.
 > الكود في المشروع **جاهز بالكامل** — لا حاجة لأي تعديل برمجي بعد الآن.
@@ -9,7 +9,7 @@
 
 1. افتح [supabase.com](https://supabase.com) → **Sign in** (حساب GitHub أو email)
 2. **New project**:
-   - Name: `qaven`
+   - Name: `aldirxon`
    - Database Password: أنشئ كلمة قوية واحفظها في مكان آمن (لن تُعرض مجدداً)
    - Region: **Frankfurt (eu-central-1)** — الأقرب لعُمان مع توفر الخدمة
    - Plan: Free كافٍ للبداية
@@ -58,9 +58,9 @@ NEXT_PUBLIC_SITE_URL=http://localhost:4321
 - للاختبار المحلي: أوقف **Confirm email** (Settings → Auth → Disable email confirmations) حتى لا تحتاج بريداً حقيقياً. فعّله عند الإطلاق.
 
 ### 4ب. Google OAuth (10 دقائق إضافية)
-1. افتح [console.cloud.google.com](https://console.cloud.google.com) → **New Project** باسم `qaven`
+1. افتح [console.cloud.google.com](https://console.cloud.google.com) → **New Project** باسم `aldirxon`
 2. **APIs & Services → OAuth consent screen**:
-   - User Type: External → Fill: App name `QAVEN`، support email
+   - User Type: External → Fill: App name `ALDIRXON`، support email
    - أضف Scopes: `email`, `profile`, `openid`
    - Test users: أضف بريدك (يلزم حتى نشر التطبيق)
 3. **Credentials → Create Credentials → OAuth Client ID**:

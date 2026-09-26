@@ -1,7 +1,7 @@
 import { supabaseServer } from "@/lib/auth/supabase-server";
 
 /* ============================================================
- * QAVEN — Admin guard (server-only)
+ * ALDIRXON — Admin guard (server-only)
  * ------------------------------------------------------------
  * • قائمة المديرين من ADMIN_EMAILS (fallback: البريد الأساسي)
  * • التحقق يتم على الخادم حصراً — الواجهة تعرض الرابط فقط

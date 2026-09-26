@@ -21,11 +21,11 @@ const plex = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
   title: {
-    default: "QAVEN — Technology. Simplified.",
-    template: "%s — QAVEN",
+    default: "ALDIRXON — Technology. Simplified.",
+    template: "%s — ALDIRXON",
   },
   description:
-    "QAVEN — متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان. هواتف، سماعات، أجهزة Gaming ومنتجات المنزل الذكي، أصلية بضمان الوكيل مع توصيل لكل المحافظات.",
+    "ALDIRXON — متجر الإلكترونيات والأجهزة الذكية في سلطنة عُمان. هواتف، سماعات، أجهزة Gaming ومنتجات المنزل الذكي، أصلية بضمان الوكيل مع توصيل لكل المحافظات.",
 };
 
 export const viewport: Viewport = {

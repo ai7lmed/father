@@ -1,7 +1,7 @@
 "use client";
 
 /* ============================================================
- * QAVEN — Auth Experience (مربوطة بـ Supabase)
+ * ALDIRXON — Auth Experience (مربوطة بـ Supabase)
  * ------------------------------------------------------------
  * Google OAuth · Email+Password (دخول/تسجيل/استعادة) · Phone OTP
  * الجلسة كوكيز HttpOnly عبر @supabase/ssr — لا localStorage إطلاقاً

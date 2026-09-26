@@ -15,7 +15,7 @@ import { SetupBundle } from "@/components/setup-bundle";
 import { SafeImg } from "@/components/ui";
 import { Reveal } from "@/components/motion";
 
-export const metadata = { title: "QAVEN Gaming" };
+export const metadata = { title: "ALDIRXON Gaming" };
 
 const HERO =
   "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=1600&q=80";
@@ -45,7 +45,7 @@ function GamingHero() {
 
       <div className="shell relative py-16 sm:py-20 lg:py-24">
         <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan">
-          QAVEN GAMING
+          ALDIRXON GAMING
         </p>
         <h1 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.15] tracking-tight sm:text-5xl">
           Level up your setup.
@@ -137,7 +137,7 @@ function FeaturedGear() {
 /* ——— Esports band ——— */
 function Esports() {
   const points = [
-    { icon: Trophy, title: "QAVEN Tournaments", text: "بطولات دورية داخل عُمان بجوائز معدات." },
+    { icon: Trophy, title: "ALDIRXON Tournaments", text: "بطولات دورية داخل عُمان بجوائز معدات." },
     { icon: Users, title: "Sponsored Teams", text: "دعم الفرق واللاعبين المحليين." },
     { icon: Target, title: "Pro Approved", text: "المعدات نفسها التي نوصي بها للاعبين." },
   ];
@@ -147,7 +147,7 @@ function Esports() {
       <div className="shell py-14 sm:py-16">
         <Reveal>
           <div>
-            <p className="eyebrow text-cyan">QAVEN ESPORTS</p>
+            <p className="eyebrow text-cyan">ALDIRXON ESPORTS</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
               نبني مشهد الألعاب في عُمان
             </h2>

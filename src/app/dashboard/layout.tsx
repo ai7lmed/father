@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getAdminUser } from "@/lib/auth/admin";
 import { DashboardNav } from "./nav";
+import { ToastProvider } from "./ui";
 
 export const dynamic = "force-dynamic";
 
@@ -14,13 +15,15 @@ export default async function DashboardLayout({
   if (!user) redirect("/account");
 
   return (
-    <div className="shell min-h-[70vh] py-10">
-      <div className="mb-8">
-        <p className="eyebrow">QAVEN ADMIN</p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight">لوحة التحكم</h1>
+    <ToastProvider>
+      <div className="shell min-h-[70vh] py-10">
+        <div className="mb-8">
+          <p className="eyebrow">ALDIRXON ADMIN</p>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight">لوحة التحكم</h1>
+        </div>
+        <DashboardNav />
+        <div className="mt-8">{children}</div>
       </div>
-      <DashboardNav />
-      <div className="mt-8">{children}</div>
-    </div>
+    </ToastProvider>
   );
 }

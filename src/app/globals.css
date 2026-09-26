@@ -3,7 +3,7 @@
 @theme {
   --font-sans: var(--font-plex), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
 
-  /* QAVEN core — cool neutrals instead of pure black/white */
+  /* ALDIRXON core — cool neutrals instead of pure black/white */
   --color-ink: #10151d;      /* deep navy-charcoal — headings, dark surfaces */
   --color-night: #171e29;    /* dark surface (footer, gaming) */
   --color-graphite: #3d4654; /* mid gray-blue — secondary text */

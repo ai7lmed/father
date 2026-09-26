@@ -8,7 +8,7 @@ import type {
 } from "./db/schema";
 
 /* ============================================================
- * QAVEN catalog — settings + categories + products
+ * ALDIRXON catalog — settings + categories + products
  * ------------------------------------------------------------
  * DB PATH: الإعدادات والتصنيفات والمنتجات هنا مصممة بنفس أنواع
  * جدول قاعدة البيانات (schema.ts) — عند الربط تُقرأ عبر
@@ -19,10 +19,10 @@ import type {
 
 export const settings: QavenSettings = {
   store: {
-    name: "QAVEN",
+    name: "ALDIRXON",
     currency: "OMR",
-    whatsapp: "+9689XXXXXXX",
-    email: "support@qaven.om",
+    whatsapp: "+96895535100",
+    email: "support@aldirxon.om",
     instagram: "https://instagram.com",
   },
   deliveryMethods: [
@@ -61,7 +61,7 @@ export const settings: QavenSettings = {
   freeShippingThreshold: 25,
   bankAccount: {
     bankName: "بنك مسقط",
-    accountName: "شركة قافن للتجارة",
+    accountName: "شركة الدايركسون للتجارة",
     accountNumber: "0301-234567-001",
     iban: "OM45BOMR0301234567001",
   },
@@ -198,7 +198,7 @@ export const products: Product[] = [
   {
     id: "solar-cam-2k",
     name: "كاميرا شمسية لاسلكية 2K",
-    brand: "QAVEN Select",
+    brand: "ALDIRXON Select",
     category: "solar-cameras",
     tags: ["solar", "security-camera", "wireless"],
     price: 49,
@@ -223,7 +223,7 @@ export const products: Product[] = [
   {
     id: "solar-cam-4g",
     name: "كاميرا شمسية 4G للمواقع البعيدة",
-    brand: "QAVEN Select",
+    brand: "ALDIRXON Select",
     category: "solar-cameras",
     tags: ["solar", "security-camera", "4g"],
     price: 89,

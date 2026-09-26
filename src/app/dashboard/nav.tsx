@@ -7,7 +7,7 @@ const items = [
   { href: "/dashboard", label: "نظرة عامة" },
   { href: "/dashboard/orders", label: "الطلبات" },
   { href: "/dashboard/products", label: "المنتجات" },
-  { href: "/dashboard/categories", label: "التصنيفات" },
+  { href: "/dashboard/categories", label: "الأقسام" },
   { href: "/dashboard/customers", label: "العملاء" },
   { href: "/dashboard/coupons", label: "الكوبونات" },
   { href: "/dashboard/transfers", label: "التحويلات" },
