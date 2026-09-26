@@ -1,0 +1,68 @@
+
+> qaven@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.25
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (113kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (267kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled successfully in 6.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/59) ...
+   Generating static pages (14/59) 
+   Generating static pages (29/59) 
+   Generating static pages (44/59) 
+ ✓ Generating static pages (59/59)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      192 B         125 kB
+├ ○ /_not-found                            153 B         103 kB
+├ ○ /about                               1.48 kB         121 kB
+├ ○ /account                             5.53 kB         119 kB
+├ ƒ /api/account/orders                    153 B         103 kB
+├ ƒ /api/addresses                         153 B         103 kB
+├ ƒ /api/auth/callback                     153 B         103 kB
+├ ƒ /api/auth/google                       153 B         103 kB
+├ ƒ /api/auth/me                           153 B         103 kB
+├ ƒ /api/auth/otp                          153 B         103 kB
+├ ƒ /api/auth/password                     153 B         103 kB
+├ ƒ /api/auth/signout                      153 B         103 kB
+├ ƒ /api/checkout-data                     153 B         103 kB
+├ ƒ /api/orders                            153 B         103 kB
+├ ○ /cart                                2.74 kB         127 kB
+├ ○ /checkout                            7.48 kB         127 kB
+├ ○ /contact                             3.36 kB         106 kB
+├ ○ /gaming                              1.07 kB         126 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ○ /login                               6.62 kB         127 kB
+├ ○ /order-success                       3.83 kB         124 kB
+├ ● /policies/[slug]                       165 B         106 kB
+├   ├ /policies/shipping
+├   ├ /policies/returns
+├   ├ /policies/privacy
+├   └ /policies/terms
+├ ● /product/[slug]                      3.37 kB         128 kB
+├   ├ /product/solar-cam-2k
+├   ├ /product/solar-cam-4g
+├   ├ /product/galaxy-s24
+├   └ [+26 more paths]
+├ ○ /search                              2.03 kB         127 kB
+├ ƒ /shop                                  186 B         125 kB
+└ ○ /wishlist                              985 B         126 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/255-37e0f0325134c4d7.js       46.4 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          2.01 kB
+
+
+ƒ Middleware                             94.7 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

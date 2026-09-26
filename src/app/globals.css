@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-plex), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+
+  /* QAVEN core — cool neutrals instead of pure black/white */
+  --color-ink: #10151d;      /* deep navy-charcoal — headings, dark surfaces */
+  --color-night: #171e29;    /* dark surface (footer, gaming) */
+  --color-graphite: #3d4654; /* mid gray-blue — secondary text */
+  --color-steel: #6b7686;    /* muted slate — tertiary text */
+  --color-silver: #c6ccd4;   /* silver — subtle borders, dark-page accents */
+  --color-mist: #e2e5e9;     /* light gray — borders */
+  --color-cloud: #f2f3f5;    /* light gray — image panels */
+  --color-paper: #f7f8f9;    /* near-white — alternating sections */
+  --color-paper2: #fbfcfc;   /* white-ish page background */
+
+  /* Tech accents — used sparingly */
+  --color-accent: #2e6ba8;   /* calm technical blue — links, highlights, CTAs */
+  --color-accent-deep: #23547f;
+  --color-cyan: #3e98a8;     /* desaturated teal-cyan — GAMING sections only */
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper2 text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    @apply bg-ink text-white;
+  }
+
+  img {
+    @apply select-none;
+  }
+}
+
+/* Page container */
+@utility shell {
+  @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8;
+}
+
+/* Small uppercase Latin label above section titles */
+@utility eyebrow {
+  @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-steel;
+}
+
+/* ————————————————— Motion ————————————————— */
+
+.page-enter {
+  animation: page-in 0.4s var(--ease-out-quart) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s var(--ease-out-quart),
+    transform 0.55s var(--ease-out-quart);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.badge-pop {
+  animation: badge-pop 0.4s var(--ease-out-quart);
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Details/summary accordion — smooth content reveal */
+details.acc[open] .acc-icon {
+  transform: rotate(180deg);
+}
+details.acc .acc-icon {
+  transition: transform 0.25s var(--ease-out-quart);
+}
+details.acc .acc-body {
+  animation: acc-in 0.3s var(--ease-out-quart);
+}
+@keyframes acc-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hide scrollbars on horizontal chip rails */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ————————————————— Auth page motion ————————————————— */
+
+.stagger-in {
+  animation: step-in 0.45s var(--ease-out-quart) both;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.otp-cell {
+  transition:
+    border-color 0.18s var(--ease-out-quart),
+    box-shadow 0.18s var(--ease-out-quart),
+    transform 0.18s var(--ease-out-quart);
+}
+
+.otp-cell:focus {
+  transform: translateY(-2px);
+}
+
+.otp-cell.filled {
+  border-color: var(--color-ink);
+}
+
+.spin-ring {
+  animation: spin-ring 0.8s linear infinite;
+}
+
+@keyframes spin-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shake {
+  animation: shake 0.4s var(--ease-out-quart);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* Hide the Next.js dev-tools "N" badge (dev only — not present in production) */
+nextjs-portal {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .page-enter {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .badge-pop,
+  .stagger-in,
+  .shake {
+    animation: none;
+  }
+  .otp-cell {
+    transition: none;
+  }
+}
