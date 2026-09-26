@@ -1,0 +1,18 @@
+// ALDIRXON — Cloudflare Workers (OpenNext) — Production
+// الرئيسي: `npm run deploy` (يبني ثم ينشر) — النشر التلقائي لاحقاً عبر ربط GitHub في اللوحة.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aldirxon",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // يُربط تلقائياً عند أول deploy (open-next.config.ts → kvIncrementalCache)
+  "kv_namespaces": []
+}

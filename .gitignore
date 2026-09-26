@@ -16,3 +16,5 @@ next-env.d.ts
 # Freebuff runtime files (يبقى run.md موثقاً)
 .freebuff/*
 !.freebuff/run.md
+.open-next/
+.wrangler/
