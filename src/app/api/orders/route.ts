@@ -287,7 +287,8 @@ export async function POST(request: NextRequest) {
 
   /* ——— الفاتورة + الإشعارات: بعد الرد عبر waitUntil — فشلها لا يفشل الطلب أبداً ——— */
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://aldirxon.myhome2003ah.workers.dev").replace(/\/$/, "");
-  const invoiceUrl = `${siteUrl}/api/invoice/${orderId}?t=${guestInvoiceToken(orderId, phone, total)}`;
+  const invoiceToken = await guestInvoiceToken(orderId, phone, total);
+  const invoiceUrl = `${siteUrl}/api/invoice/${orderId}?t=${invoiceToken}`;
   const placedAt = new Date().toISOString();
   const notifyPayload = {
     id: orderId,

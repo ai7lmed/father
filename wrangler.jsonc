@@ -13,6 +13,8 @@
   "observability": {
     "enabled": true
   },
+  // يمنع نشر CI من مسح الأسرار المضبوطة عبر wrangler secret — حماية إلزامية
+  "keep_vars": true,
   // يُربط تلقائياً عند أول deploy (open-next.config.ts → kvIncrementalCache)
   "kv_namespaces": []
 }
