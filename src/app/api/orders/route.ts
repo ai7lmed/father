@@ -1,4 +1,5 @@
 import { type NextRequest } from "next/server";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { supabaseServer } from "@/lib/auth/supabase-server";
 import { supabaseAdmin } from "@/lib/auth/customers";
 import {
@@ -8,13 +9,19 @@ import {
   logNotification,
 } from "@/lib/notifications";
 
-/* waitUntil — يُبقي العمل الحي بعد إرسال الرد (متوافق OpenNext Cloudflare) */
-function getWaitUntil(request: NextRequest): (p: Promise<unknown>) => void {
-  const cf = (request as unknown as { cf?: { waitUntil?: (p: Promise<unknown>) => void } }).cf;
-  if (typeof cf?.waitUntil === "function") return cf.waitUntil.bind(cf);
-  return (p: Promise<unknown>) => {
-    p.catch(() => {}); // بيئة التطوير أو غياب cf — لا تكسر شيئاً
-  };}
+/* waitUntil — يُبقي العمل الحي بعد إرسال الرد (OpenNext/Cloudflare الرسمي)
+   البديل: تنفيذ مباشر قبل الرد — الإشعارات بلا مفاتيح تنتهي بسرعة فائقة */
+function getWaitUntil(): (p: Promise<unknown>) => void {
+  try {
+    const { ctx } = getCloudflareContext() as unknown as {
+      ctx?: { waitUntil?: (p: Promise<unknown>) => void };
+    };
+    if (typeof ctx?.waitUntil === "function") return ctx.waitUntil.bind(ctx);
+  } catch {
+    /* بيئة التطوير أو غياب السياق */
+  }
+  return (p) => void p.catch(() => {});
+}
 
 /* ============================================================
  * POST /api/orders — إنشاء طلب حقيقي في قاعدة البيانات
@@ -72,7 +79,7 @@ async function guestInvoiceToken(orderId: string, phone: string, total: number):
 }
 
 export async function POST(request: NextRequest) {
-  const waitUntil = getWaitUntil(request);
+  const waitUntil = getWaitUntil();
 
   /* ——— 0) الجلسة ——— */
   const supabase = await supabaseServer();
