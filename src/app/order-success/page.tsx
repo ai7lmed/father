@@ -14,6 +14,7 @@ export default function OrderSuccessPage() {
   const [checked, setChecked] = useState(false);
   const [issuedCoupon, setIssuedCoupon] = useState<string | null>(null);
   const [notify, setNotify] = useState<{ email: boolean; whatsapp: boolean } | null>(null);
+  const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -23,9 +24,15 @@ export default function OrderSuccessPage() {
       try {
         const raw = window.sessionStorage.getItem("qaven-order");
         if (raw) {
-          const mirror = JSON.parse(raw) as { id: string; total: number; coupon?: string; notifications?: { email: boolean; whatsapp: boolean } };
+          const mirror = JSON.parse(raw) as { id: string; total: number; coupon?: string; notifications?: { email: boolean; whatsapp: boolean }; invoiceUrl?: string };
           if (mirror.coupon) setIssuedCoupon(mirror.coupon);
           if (mirror.notifications) setNotify(mirror.notifications);
+          if (mirror.invoiceUrl) setInvoiceUrl(mirror.invoiceUrl);
+          /* الفاتورة: للضيف برابط موقّع، ولصاحب الحساب عبر الجلسة مباشرة */
+          try {
+            const inv = await fetch(`/api/invoice/${encodeURIComponent(mirror.id)}`, { cache: "no-store" });
+            if (inv.ok) setInvoiceUrl(`/api/invoice/${encodeURIComponent(mirror.id)}`);
+          } catch { /* الضيف بدون توقيع — الرابط الموقّع يأتي من الإشعارات */ }
           const res = await fetch(`/api/orders?id=${encodeURIComponent(mirror.id)}`, {
             cache: "no-store",
           });
@@ -254,6 +261,22 @@ export default function OrderSuccessPage() {
             </div>
           </div>
         </div>
+
+        {invoiceUrl && (
+          <div className="mt-6">
+            <a
+              href={invoiceUrl}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex h-12 items-center gap-2 rounded-lg border border-ink/15 bg-white px-7 text-sm font-medium text-ink transition-all duration-200 hover:border-ink active:scale-[0.98]"
+            >
+              🧾 عرض الفاتورة
+            </a>
+            <p className="mt-2 text-[11px] text-steel">
+              فاتورة رسمية قابلة للطباعة أو الحفظ PDF — وتصلك أيضاً عبر البريد وواتساب
+            </p>
+          </div>
+        )}
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link

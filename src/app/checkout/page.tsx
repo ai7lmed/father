@@ -219,6 +219,7 @@ export default function CheckoutPage() {
         order?: { id: string; total: number };
         coupon?: { applied: boolean; error?: string | null; issued?: string | null };
         notifications?: { email: boolean; whatsapp: boolean };
+        invoiceUrl?: string;
       };
 
       if (!json.ok || !json.order) {
@@ -243,6 +244,7 @@ export default function CheckoutPage() {
             total: json.order.total,
             coupon: json.coupon?.issued ?? undefined,
             notifications: json.notifications ?? undefined,
+            invoiceUrl: json.invoiceUrl ?? undefined,
           })
         );
       } catch { /* ignore */ }

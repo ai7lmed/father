@@ -1,7 +1,20 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 import { supabaseServer } from "@/lib/auth/supabase-server";
 import { supabaseAdmin } from "@/lib/auth/customers";
-import { sendOrderNotifications, customerEmailFor, notificationsStatus } from "@/lib/notifications";
+import {
+  sendOrderNotifications,
+  customerEmailFor,
+  notificationsStatus,
+  logNotification,
+} from "@/lib/notifications";
+
+/* waitUntil — يُبقي العمل الحي بعد إرسال الرد (متوافق OpenNext Cloudflare) */
+function getWaitUntil(request: NextRequest): (p: Promise<unknown>) => void {
+  const cf = (request as unknown as { cf?: { waitUntil?: (p: Promise<unknown>) => void } }).cf;
+  if (typeof cf?.waitUntil === "function") return cf.waitUntil.bind(cf);
+  return (p: Promise<unknown>) => {
+    p.catch(() => {}); // بيئة التطوير أو غياب cf — لا تكسر شيئاً
+  };}
 
 /* ============================================================
  * POST /api/orders — إنشاء طلب حقيقي في قاعدة البيانات
@@ -47,7 +60,20 @@ function normalizeOmaniPhone(raw: string): string | null {
   return /^9\d{7}$/.test(local) ? local : null;
 }
 
+/* توقيع الفاتورة للضيف — SHA-256 من (الطلب + الهاتف + الإجمالي + سر الخادم) */
+async function guestInvoiceToken(orderId: string, phone: string, total: number): Promise<string> {
+  const secret = (process.env.SUPABASE_SERVICE_ROLE_KEY ?? "").slice(0, 32);
+  const data = new TextEncoder().encode(`${orderId}|${phone}|${total.toFixed(3)}|${secret}`);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("")
+    .slice(0, 32);
+}
+
 export async function POST(request: NextRequest) {
+  const waitUntil = getWaitUntil(request);
+
   /* ——— 0) الجلسة ——— */
   const supabase = await supabaseServer();
   const {
@@ -246,6 +272,9 @@ export async function POST(request: NextRequest) {
     if (rcptErr) console.error("[orders] receipt:", rcptErr.message);
   }
 
+  /* ——— جلب بريد العميل قبل الرد (نحتاجه للفاتورة والإشعارات) ——— */
+  const customerEmail = user ? await customerEmailFor(user.id) : null;
+
   /* خصم المخزون — أقل صبراً على الأخطاء (التقارير لاحقاً) */
   for (const i of items) {
     const current = priceMap.get(i.productId)!.stock;
@@ -256,31 +285,47 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  /* ——— الإشعارات: بعد نجاح الطلب نهائياً — فشلها لا يؤثر على الرد ——— */
-  const notify = notificationsStatus();
-  if (user || customerEmailFor) {
-    const email = user ? await customerEmailFor(user.id) : null;
-    void sendOrderNotifications({
-      id: orderId,
-      status: orderRow.status,
-      customerName: body.address.fullName.trim(),
-      customerEmail: email,
-      customerPhone: phone,
-      items: itemRows.map((r) => ({ name: r.name, qty: r.qty, unitPrice: r.unit_price })),
-      subtotal,
-      discount,
-      deliveryMethod: body.deliveryMethod,
-      deliveryFee,
-      paymentMethod: body.paymentMethod,
-      total,
-      city: body.address.city.trim(),
-      address: body.address.address.trim(),
-      placedAt: new Date().toISOString(),
-    }).then((r) => {
+  /* ——— الفاتورة + الإشعارات: بعد الرد عبر waitUntil — فشلها لا يفشل الطلب أبداً ——— */
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://aldirxon.myhome2003ah.workers.dev").replace(/\/$/, "");
+  const invoiceUrl = `${siteUrl}/api/invoice/${orderId}?t=${guestInvoiceToken(orderId, phone, total)}`;
+  const placedAt = new Date().toISOString();
+  const notifyPayload = {
+    id: orderId,
+    status: orderRow.status,
+    customerName: body.address.fullName.trim(),
+    customerEmail,
+    customerPhone: phone,
+    items: itemRows.map((r) => ({ name: r.name, qty: r.qty, unitPrice: r.unit_price })),
+    subtotal,
+    discount,
+    deliveryMethod: body.deliveryMethod,
+    deliveryFee,
+    paymentMethod: body.paymentMethod,
+    total,
+    city: body.address.city.trim(),
+    address: body.address.address.trim(),
+    placedAt,
+    invoiceUrl,
+  };
+
+  waitUntil(
+    (async () => {
+      /* رابط الفاتورة يُحفظ أولاً — ثم تُرسل الإشعارات بالرابط نفسه */
+      try {
+        await admin
+          .from("invoice_links")
+          .upsert({ order_id: orderId, url: invoiceUrl, method: "hosted_html" } as never, { onConflict: "order_id" });
+      } catch (e) {
+        console.warn("[orders] invoice link:", e instanceof Error ? e.message : e);
+      }
+
+      const r = await sendOrderNotifications(notifyPayload);
       if (!r.email.ok) console.warn("[orders] email notify:", r.email.error);
       if (!r.whatsapp.ok) console.warn("[orders] whatsapp notify:", r.whatsapp.error);
-    });
-  }
+      if (!r.adminEmail.ok) console.warn("[orders] admin email:", r.adminEmail.error);
+      if (!r.adminWhatsApp.ok) console.warn("[orders] admin whatsapp:", r.adminWhatsApp.error);
+    })()
+  );
 
   return Response.json({
     ok: true,
@@ -299,7 +344,8 @@ export async function POST(request: NextRequest) {
       error: couponError,
       issued: issuedCoupon,
     },
-    notifications: notify,
+    invoiceUrl,
+    notifications: notificationsStatus(),
   });
 }
 
