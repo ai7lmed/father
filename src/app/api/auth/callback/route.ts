@@ -2,11 +2,17 @@ import { NextResponse, type NextRequest } from "next/server";
 import { supabaseServer } from "@/lib/auth/supabase-server";
 import { upsertCustomer } from "@/lib/auth/customers";
 
+/* next مسار داخلي فقط — يمنع open-redirect (نفس منطق مسار google) */
+function safeNext(raw: string | null): string {
+  if (raw && raw.startsWith("/") && !raw.startsWith("//") && !raw.includes("\\")) return raw;
+  return "/account";
+}
+
 /** GET /api/auth/callback?code=…&next=… — استكمال OAuth (Google) */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/account";
+  const next = safeNext(searchParams.get("next"));
 
   if (code) {
     const supabase = await supabaseServer();
