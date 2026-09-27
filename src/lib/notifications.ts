@@ -11,7 +11,12 @@ import { supabaseAdmin } from "@/lib/auth/customers";
  * ============================================================ */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAIL_FROM = process.env.MAIL_FROM ?? "ALDIRXON <onboarding@resend.dev>";
+/** MAIL_FROM كامل: "الاسم <عنوان@نطاق>" — إن وُضع عنوان فقط نضيف ALDIRXON تلقائياً
+ * (Resend يرفض From بدون بريد صالح؛ onboarding@resend.dev للاختبار قبل إضافة الدومين) */
+const MAIL_FROM_RAW = process.env.MAIL_FROM ?? "onboarding@resend.dev";
+const MAIL_FROM = /<.+>/.test(MAIL_FROM_RAW)
+  ? MAIL_FROM_RAW
+  : `ALDIRXON <${MAIL_FROM_RAW}>`;
 const ADMIN_EMAILS_NOTIFY = (process.env.ADMIN_EMAILS ?? "myhome2003ah@gmail.com")
   .split(",")
   .map((s) => s.trim())
